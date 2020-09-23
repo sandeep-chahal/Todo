@@ -1,9 +1,15 @@
 package com.srantech.todo.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.time.LocalDate;
 
+@Entity
 public class TodoPojo {
 
+    @Id
+    @GeneratedValue
     private long id;
 
     private String task;
