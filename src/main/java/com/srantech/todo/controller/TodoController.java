@@ -5,10 +5,12 @@ import com.srantech.todo.repository.TodoRepository;
 import com.srantech.todo.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 public class TodoController {
@@ -29,5 +31,11 @@ public class TodoController {
 
        return todoService.getAllTodos();
    }
+
+   @PostMapping("/addtodo")
+    public TodoPojo addNewTodo(@RequestBody TodoPojo todoPojo){
+        return todoService.addNewTodo(todoPojo);
+   }
+
 
 }

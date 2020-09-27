@@ -1,9 +1,13 @@
 package com.srantech.todo.model;
 
+
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.time.LocalDate;
+
+import java.util.Date;
+
 
 @Entity
 public class TodoPojo {
@@ -16,13 +20,13 @@ public class TodoPojo {
 
     private String description;
 
-    private LocalDate date;
+    private Date date;
 
     public TodoPojo(){
 
     }
 
-    public TodoPojo(long id, String task, String description, LocalDate date) {
+    public TodoPojo(long id, String task, String description, Date date) {
         this.id = id;
         this.task = task;
         this.description = description;
@@ -53,11 +57,11 @@ public class TodoPojo {
         this.description = description;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

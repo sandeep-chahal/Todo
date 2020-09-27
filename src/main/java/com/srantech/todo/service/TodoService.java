@@ -21,5 +21,10 @@ public class TodoService {
         return todoRepository.findAll();
     }
 
+    public TodoPojo addNewTodo(TodoPojo todoPojo){
+        return todoRepository.save(todoPojo);
+    }
+
+
 
 }
