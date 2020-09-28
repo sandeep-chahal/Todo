@@ -25,6 +25,15 @@ public class TodoService {
         return todoRepository.save(todoPojo);
     }
 
+    public TodoPojo getTodoById(Long id){
+        return todoRepository.getOne(id);
+    }
 
+    public TodoPojo updateTodo(TodoPojo todoPojo){
+        return todoRepository.save(todoPojo);
+    }
 
+    public void deleteTodo(Long id){
+        todoRepository.deleteById(id);
+    }
 }
