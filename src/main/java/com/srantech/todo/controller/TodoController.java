@@ -8,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.srantech.todo.exception.UserNotFoundException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -29,56 +31,33 @@ public class TodoController {
     }
 
     @GetMapping("/todos")
-    public ResponseEntity<List<TodoPojo>>  getAll(){
+    public ResponseEntity<List<TodoPojo>> getAll(){
 
-        List<TodoPojo> list = todoService.getAllTodos();
-
-        if(list.size()<=0){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-
-       return ResponseEntity.of(Optional.of(list));
+       return todoService.getAllTodos() ;
    }
 
    @PostMapping("/todos")
     public ResponseEntity<TodoPojo> addNewTodo(@RequestBody TodoPojo todoPojo){
 
-        if(todoPojo == null){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
-        return ResponseEntity.of(Optional.of(todoService.addNewTodo(todoPojo)));
+       return todoService.addNewTodo(todoPojo);
    }
 
    @GetMapping("/todos/{id}")
     public ResponseEntity<TodoPojo> getById(@PathVariable Long id){
-           try{
-           TodoPojo p = null;
-          p =  this.todoService.getTodoById(id);
-           return ResponseEntity.ok().body(p);
-       }
-       catch (Exception e){
-           e.printStackTrace();
-           return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-       }
+
+        return todoService.getTodoById(id);
     }
 
    @PutMapping("/todos/{id}")
-    public TodoPojo updateTodo(@PathVariable Long id,@RequestBody TodoPojo todoPojo){
+    public ResponseEntity<TodoPojo> updateTodo(@PathVariable Long id,@RequestBody TodoPojo todoPojo){
 
-        return todoService.updateTodo(todoPojo);
+        return todoService.updateTodo(id,todoPojo);
    }
 
    @DeleteMapping("/todos/{id}")
-    public ResponseEntity<TodoPojo> deleteTodoById(@PathVariable Long id){
+    public ResponseEntity<Map<String,Boolean>> deleteTodoById(@PathVariable Long id){
 
-       try{
-          this.todoService.deleteTodo(id);
-           return ResponseEntity.ok().build()   ;
-       }
-       catch (Exception e){
-           e.printStackTrace();
-           return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-       }
+       return todoService.deleteTodo(id);
    }
 
 
