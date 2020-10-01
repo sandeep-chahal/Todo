@@ -2,6 +2,8 @@ package com.srantech.todo.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,6 +22,7 @@ public class TodoPojo {
 
     private String description;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date date;
 
     public TodoPojo(){
